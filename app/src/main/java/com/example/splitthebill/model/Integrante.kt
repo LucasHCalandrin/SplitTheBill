@@ -5,7 +5,8 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Integrante (
+    var id: Int,
     var nome: String,
-    var valorPago: Float,
+    var valorPago: String,
     var itensComprados : String
 ): Parcelable
