@@ -3,8 +3,10 @@ package com.example.splitthebill.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
+import android.view.View
 import com.example.splitthebill.databinding.ActivityIntegranteBinding
 import com.example.splitthebill.model.Constant.EXTRA_CONTACT
+import com.example.splitthebill.model.Constant.VIEW_CONTACT
 import com.example.splitthebill.model.Integrante
 import java.util.Random
 
@@ -23,7 +25,15 @@ class IntegranteActivity : AppCompatActivity() {
 
         val integranteRecebido = intent.getParcelableExtra<Integrante>(EXTRA_CONTACT)
         integranteRecebido?.let { _integranteRecebido ->
+            val viewIntegrante = intent.getBooleanExtra(VIEW_CONTACT, false)
             with(aib) {
+                if(viewIntegrante){
+                    nomeEt.isEnabled = false
+                    valorEt.isEnabled = false
+                    comprouEt.isEnabled = false
+                    salvarBt.visibility= View.GONE
+
+                }
                 nomeEt.setText(_integranteRecebido.nome)
                 valorEt.setText(_integranteRecebido.valorPago)
                 comprouEt.setText(_integranteRecebido.itensComprados)

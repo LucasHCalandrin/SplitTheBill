@@ -15,6 +15,7 @@ import com.example.splitthebill.R
 import com.example.splitthebill.adapter.IntegranteAdapter
 import com.example.splitthebill.databinding.ActivityMainBinding
 import com.example.splitthebill.model.Constant.EXTRA_CONTACT
+import com.example.splitthebill.model.Constant.VIEW_CONTACT
 import com.example.splitthebill.model.Integrante
 
 class MainActivity : AppCompatActivity() {
@@ -56,6 +57,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+        }
+
+        amb.integranteLv.setOnItemClickListener { parent, view, position, id ->
+            val integrante = integranteList[position]
+            val viewIntegranteIntent = Intent(this, IntegranteActivity::class.java)
+            viewIntegranteIntent.putExtra(EXTRA_CONTACT, integrante)
+            viewIntegranteIntent.putExtra(VIEW_CONTACT, true)
+            startActivity(viewIntegranteIntent)
         }
 
         registerForContextMenu(amb.integranteLv)
