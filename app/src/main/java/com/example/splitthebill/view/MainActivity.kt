@@ -17,6 +17,7 @@ import com.example.splitthebill.databinding.ActivityMainBinding
 import com.example.splitthebill.model.Constant.EXTRA_CONTACT
 import com.example.splitthebill.model.Constant.VIEW_CONTACT
 import com.example.splitthebill.model.Integrante
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -95,6 +96,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
         val posicao = (item.menuInfo as AdapterView.AdapterContextMenuInfo).position
+        var valorDividido = 0.0
+        var valorTotalGasto = 0.0
+        for (i in integranteList){
+            valorTotalGasto += i.valorPago.toFloat()
+        }
+        valorDividido = valorTotalGasto / integranteList.size
+
         return when (item.itemId){
             R.id.removerIntegranteMI -> {
                 integranteList.removeAt(posicao)
@@ -109,10 +117,23 @@ class MainActivity : AppCompatActivity() {
                 carl.launch(editarIntegranteIntent)
                 true
             }
+            R.id.calcularDespesasMI -> {
+                val integrante = integranteList[posicao]
+                if(integrante.valorPago.toFloat() > valorDividido){
+                    var receber = integrante.valorPago.toFloat() - valorDividido
+                    Toast.makeText(this, "${integrante.nome} deve receber R$ ${receber}", Toast.LENGTH_LONG).show()
+                }
+                else if(integrante.valorPago.toFloat() < valorDividido){
+                    var pagar = valorDividido - integrante.valorPago.toFloat()
+                    Toast.makeText(this, "${integrante.nome} deve pagar R$ ${pagar}", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(this, "${integrante.nome} não deve pagar nada", Toast.LENGTH_LONG).show()
+                }
+                true
+            }
             else -> { false }
         }
     }
-
 
     override fun onDestroy() {
         super.onDestroy()

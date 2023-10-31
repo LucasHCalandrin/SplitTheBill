@@ -7,4 +7,8 @@
     <string name="valor_pago">Valor Pago</string>
     <string name="itens_comprados">Itens Comprados</string>
     <string name="salvar">Salvar</string>
+    <string name="calcular">Calcular</string>
+    <string name="deve_receber">Deve Receber</string>
+    <string name="deve_pagar">Deve Pagar</string>
+    <string name="calcular_despesa_do_integrante">Calcular Despesa do Integrante</string>
 </resources>

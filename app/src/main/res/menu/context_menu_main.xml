@@ -8,4 +8,8 @@
         android:id="@+id/editarIntegranteMI"
         android:title="@string/editar_integrante" />
 
+    <item
+        android:id="@+id/calcularDespesasMI"
+        android:title="@string/calcular_despesa_do_integrante" />
+
 </menu>
